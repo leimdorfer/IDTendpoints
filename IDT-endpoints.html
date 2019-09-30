@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+    </head>
+
+    <body>
+        <h1>Find useful IDT2 endpoints</h1>
+        <form name="uuid-form"></form>
+            <p>Enter your IDT2 UUID:
+                <input name="uuid" type="text" id="uniqueID">
+            </p>
+        </form>
+
+        <button type="button" onclick="get_the_endpoints()">Click me to get the endpoints.</button>
+
+        <ul>
+            <div id="output"></div>
+        </ul>
+
+        <script type="text/javascript">
+
+            endpoints_name=["HTML", "Envelope","Amp","Meta"];
+            endpoints_url=["/html", "/envelope","/amp","/meta"];
+            smallprox = "https://smallprox.vj.tools.bbc.co.uk/idt2/"
+
+            function get_the_endpoints(){
+
+                var uuid_input = document.getElementById("uniqueID").value;
+
+                if(uuid_input.length<36){
+
+                    document.getElementById("output0").innerHTML = "Please enter a valid UUID"
+
+                } else {
+
+                    var output_li = "";
+
+                    for(var i=0;i<endpoints_name.length;i++){
+
+                        var list_item = "<li>"+
+                                    endpoints_name[i]+
+                                    ": "+
+                                    "<a href ='"+
+                                    smallprox+
+                                    uuid_input+
+                                    endpoints_url[i]+
+                                    "' target='_blank' >"+
+                                    smallprox+
+                                    uuid_input+
+                                    endpoints_url[i]+
+                                    "</a></li>";
+
+                        var output_li = output_li+list_item;
+
+                    }
+
+                    var output_li = output_li+
+                      "<li>iChef 816:"+
+                      "<a href ='https://ichef.bbci.co.uk/news/amp/idt2/816/"+
+                      uuid_input+
+                      "' target='_blank' >ichef.bbci.co.uk/news/amp/idt2/816/"+
+                      uuid_input+
+                      "</a></li>";
+
+                    var output_li = output_li+
+                        "<li>iChef 350:"+
+                        "<a href ='https://ichef.bbci.co.uk/news/amp/idt2/350/"+
+                        uuid_input+
+                        "' target='_blank' >ichef.bbci.co.uk/news/amp/idt2/350/"+
+                        uuid_input+
+                        "</a></li>";
+
+                    //https://ichef.bbci.co.uk/news/amp/idt2/816/41a6ad82-8bad-482e-9645-301af4a8e857
+
+                    document.getElementById("output").innerHTML = output_li;
+
+                    console.log(output_li);
+                }
+            }
+
+            /* NOTES
+
+            test UUID: 41a6ad82-8bad-482e-9645-301af4a8e857
+            HTML endpoint:
+            https://smallprox.vj.tools.bbc.co.uk/idt2/f062c138-1b9a-4317-88f0-f0f751b3dc11/html
+            envelope endpoint:
+            https://smallprox.vj.tools.bbc.co.uk/idt2/f062c138-1b9a-4317-88f0-f0f751b3dc11/envelope
+            AMP endpoint:
+            https://smallprox.vj.tools.bbc.co.uk/idt2/41a6ad82-8bad-482e-9645-301af4a8e857/amp
+            META endpoint:
+            https://smallprox.vj.tools.bbc.co.uk/idt2/f062c138-1b9a-4317-88f0-f0f751b3dc11/meta
+
+            iChef user facing url:
+            https://ichef.bbci.co.uk/news/amp/idt2/816/41a6ad82-8bad-482e-9645-301af4a8e857
+
+
+            */
+        </script>
+    </body>
+</html>
